@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block content %}
+<body class="text-center">
+<main role="main" class="inner cover">
+    <div class="card-body mx-auto p-5">
+        <p class="lead">Do you have any questions? Please do not hesitate to contact us directly. Our team will come
+            back to you within
+            a matter of hours to help you</p>
+    </div>
+    <div class="card-body h-auto d-inline-block w-auto min-vh-100">
+
+        <div class="row h-50 w-auto p-5">
+            {% if success %}
+            <div class="alert alert-success">Your message has been sent.</div>
+            {% else %}
+            {% for message in form.firstName.errors %}
+            <div class="flash alert alert-danger">{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.lastName.errors %}
+            <div class="flash alert alert-danger">{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.email.errors %}
+            <div class="flash alert alert-danger">{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.subject.errors %}
+            <div class="flash alert alert-danger">{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.message.errors %}
+            <div class="flash alert alert-danger">{{ message }}</div>
+            {% endfor %}
+
+            <!--Grid column-->
+            <div class="col-md-9 mb-md-0 mb-5">
+                <form action="{{ url_for('contact') }}" method="POST" name="contact" role="form">
+                    {{form.hidden_tag()}}
+
+                    <!--Grid row-->
+                    <div class="row">
+                            <!--Grid column-->
+                            <div class=" form-group col-md-6">
+
+                                {{ form.firstName(class="form-control", placeholder="First Name",
+                                **{'data-validation':'required'}) }}
+
+                            </div>
+
+                        <!--Grid column-->
+                        <!--Grid column-->
+                        <div class="form-group col-md-6">
+
+                            {{ form.lastName(class="form-control", placeholder="Last Name",
+                            **{'data-validation':'required'}) }}
+
+                        </div>
+
+                        <!--Grid column-->
+                        <div class="form-group col-md-6">
+
+                            {{ form.email(class="form-control", placeholder="Email Address",
+                            **{'data-validation':'email'}) }}
+
+                        </div>
+                        <!--Grid column-->
+
+                    </div>
+                    <!--Grid row-->
+
+                    <!--Grid row-->
+                    <div class="row">
+                        <div class="form-group col-md-12">
+
+                            {{ form.subject(class="form-control", placeholder="Subject",
+                            **{'data-validation':'required'}) }}
+
+                        </div>
+                    </div>
+                    <!--Grid row-->
+
+                    <!--Grid row-->
+                    <div class="row">
+
+                        <!--Grid column-->
+                        <div class="form-group col-md-12">
+
+                            <div class="md-form">
+                                {{ form.message(class="form-control", placeholder="What's on your mind?",
+                                **{'data-validation':'required'}) }}
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--Grid row-->
+                    <div class="text-center text-md-left">
+                        {{ form.submit(class="btn btn-default btn-block") }}
+                    </div>
+                    <div class="status"></div>
+
+                </form>
+
+
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-md-2 ml-md-auto text-center">
+                <ul class="list-unstyled mb-0">
+                    <li><i class="fa fa-map-marker fa-2x"></i>
+                        <p>Afri-Q360, Atomic Hills, Accra, Ghana</p>
+                    </li>
+
+                    <li><i class="fa fa-phone mt-4 fa-2x"></i>
+                        <p>+1 517-940-0704 </p>
+                        <p>+1 517-940-1289</p>
+                    </li>
+
+                    <li><i class="fa fa-whatsapp mt-4 fa-2x"></i>
+                        <p>+233 245-802-483 </p>
+                    </li>
+
+                    <li><i class="fa fa-envelope mt-4 fa-2x"></i>
+                        <p>Afriq360global@gmail.com</p>
+                    </li>
+                </ul>
+            </div><!--Grid column-->
+        </div>
+    </div>
+    {% endif %}
+
+</main>
+</body>
+{% endblock content %}
